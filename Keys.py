@@ -1,0 +1,2 @@
+apiKey = "VZWfKov03SfUhMXyMpX2ZdJikWnNIFqIHxvCJGoGhDi6HU2tJEgIoGt4kk7xYqZB"
+apiSecurityKey = "ew0uaiZqgouVoU8z43srfZSMxNyWumTF1ZrgSqYOyHSeK4LZMgdx9tO6chicB5J1"

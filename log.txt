@@ -1,0 +1,20 @@
+
+2021-06-26, Close; 1797.43, time: 00:11:52, MACD: -4.339937293979347, Signal: -3.4270948297299464, bothNegative, -1
+2021-06-26, Close; 1810.69, time: 00:17:54, MACD: -1.9103589126980296, Signal: -3.1070228476538495, bothNegative, 1
+2021-06-26, time: 23:54:17, Close; 1770.97, MACD: 0.7034848824278015, Signal: -1.142511961829185, macdPositive,signalNegative, 1
+2021-06-28, time: 23:09:36, Close; 2129.47, buy/hold, MACD: 8.72552471350582, Signal: 5.2947197290033525, bothPositive
+2021-07-01, time: 22:18:51, Close; 2110.48, buy/hold, MACD: 4.892075114968975, Signal: 0.9269271241239155, bothPositive
+2021-07-01, time: 22:21:53, Close; 2108.82, sell, MACD: 4.022459193096438, Signal: 1.8542098409002907, bothPositive
+2021-07-22, time: 20:08:33, Close; 2025.08, buy/hold, MACD: -161.9657369969625, Signal: -205.24935457057614, bothNegative
+2021-07-22, time: 20:15:31, Close; 2031.25, buy/hold, MACD: -160.25184810807377, Signal: -204.67805827427992, bothNegative
+2021-07-22, time: 20:17:05, Close; 2026.57, buy/hold, MACD: -161.5518481080735, Signal: -205.11139160761314, bothNegative
+2021-07-22, time: 20:23:11, Close; 2024.12, buy/hold, MACD: -162.23240366362916, Signal: -205.33824345946505, bothNegative
+2021-07-22, time: 20:52:51, Close; 2027.25, buy/hold, MACD: -161.36295921918486, Signal: -205.04842864465027, bothNegative
+2021-07-22, time: 20:55:09, Close; 2026.55, buy/hold, MACD: -161.55740366362897, Signal: -205.11324345946497, bothNegative
+2021-07-22, time: 20:56:21, Close; 2025.64, buy/hold, MACD: -161.8101814414067, Signal: -205.19750271872422, bothNegative
+2021-07-22, time: 20:59:03, Close; 2024.01, buy/hold, MACD: -162.26295921918472, Signal: -205.34842864465023, bothNegative
+2021-07-22, time: 21:23:25, Close; 2025.93, buy/hold, MACD: -161.7296258858512, Signal: -205.1706508668724, bothNegative
+2021-07-22, time: 23:09:29, Close; 2019.58, buy/hold, MACD: -163.4935147747401, Signal: -205.75861382983535, bothNegative
+2021-07-22, time: 23:09:53, Close; 2019.51, buy/hold, MACD: -163.51295921918472, Signal: -205.76509531131688, bothNegative
+2021-07-22, time: 23:13:01, Close; 2016.73, buy/hold, MACD: -164.28518144140685, Signal: -206.02250271872427, bothNegative
+2021-07-22, time: 23:13:33, Close; 2018.77, buy/hold, MACD: -163.71851477474002, Signal: -205.83361382983531, bothNegative
