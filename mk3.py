@@ -1,4 +1,4 @@
-
+from csv import reader
 import pandas as pd
 #import numpy as np
 import matplotlib.pyplot as plt
@@ -7,7 +7,7 @@ from binance.client import Client
 import Keys
 import os
 import time
-from datetime import date, datetime, timedelta
+import datetime
 
 targetCoin = "ETH"
 targetCoinExchange = targetCoin+"USDT"
@@ -48,11 +48,15 @@ longEMA = targetDf.Close.ewm(span = 26, adjust=False).mean()
 MACD = shortEMA - longEMA
 
 #signal Line
-signal = MACD.ewm(span=5, adjust=False).mean()
+signal = MACD.ewm(span=9, adjust=False).mean()
 targetDf['MACD'] = MACD
 targetDf['Signal'] = signal
 
-print(targetDf)
+#print(targetDf)
+
+#making list copies of macd and signal
+macdList = targetDf['MACD'].tolist()
+signalList = targetDf['Signal'].tolist()
 
 #BuySellSignal will return 1/0 depending on whether MACD suggest buy/sell
 def BuySellSignal(recentMACDValue, recentSignalValue):
@@ -87,11 +91,58 @@ def BuySellSignal(recentMACDValue, recentSignalValue):
         else:
             return 0
 
+BuyOrSellList = []
+def macdAndSignalCycler():
+    for i in range(len(macdList)):
+        macdValue = macdList[i]
+        signalValue = signalList[i]
+        result = BuySellSignal(macdValue, signalValue)
+        BuyOrSellList.append(result)
 
-def DataframeCycler(df):
-   # while
-        
+macdAndSignalCycler()
+
+#adding buyorsell list to dataframe
+targetDf['BuyOrSell'] = BuyOrSellList
+#print(targetDf)
+
+#unix to calendar date converter
+def UnixToCalendar(Unix):
+    date = datetime.datetime.fromtimestamp(Unix)
+    date = f"{date:%Y-%m-%d}"
+    return date
+
+Date = []
+for i in range(len(targetDf['Date'])):
+    value = (int(targetDf.Date[i]))/1000
+    value = UnixToCalendar(value)
+    Date.append(value)
+
+targetDf['Date'] = Date
+
+print(targetDf)
+#making into csv
+targetDf.to_csv('TargetInfo.csv')  
 
 
-DataframeCycler(targetDf)
+CriticalPoints = []
+#now we need to cycle through the buy/sell signal column in the csv file and calculate percentage of profits
+olderValue = 0 
+
+for i in range(len(BuyOrSellList)):
+    currentValue = BuyOrSellList[i]
+    if olderValue != currentValue:
+        price = targetDf.Close[i]
+        CriticalPoints.append(price)
+        olderValue = currentValue
+    else:  
+        continue
+
+textfile = open("CriticalPoints.txt", "w")
+for element in CriticalPoints:
+    textfile.write(str(element) + "\n")
+textfile.close()
+
+
+
+
 
