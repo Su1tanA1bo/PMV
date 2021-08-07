@@ -16,7 +16,7 @@ os.system('cls||clear')
 info = client.get_account();
 print("Logged In")
 balances = info['balances']
-targetCoinExchange = "ETHUSDT"
+
 
 #Seeing if price is correct
 ETH = client.get_symbol_ticker(symbol="ETHUSDT")
@@ -39,16 +39,16 @@ targetDf = pd.read_csv('CurrencyPrices.csv')
 targetDf.columns = ['Date', 'Open', 'High', 'Low', 'Close']
 
 #calculate short term EMA
-shortEMA = targetDf.Close.ewm(span = 12, adjust=False).mean()
+shortEMA = targetDf.Close.ewm(span = 5, adjust=False).mean()
 
 #Calculate long term EMA
-longEMA = targetDf.Close.ewm(span = 26, adjust=False).mean()
+longEMA = targetDf.Close.ewm(span = 35, adjust=False).mean()
 
 #MACD
 MACD = shortEMA - longEMA
 
 #signal Line
-signal = MACD.ewm(span=9, adjust=False).mean()
+signal = MACD.ewm(span=5, adjust=False).mean()
 targetDf['MACD'] = MACD
 targetDf['Signal'] = signal
 
@@ -71,7 +71,7 @@ def BuySellSignal(recentMACDValue, recentSignalValue):
         posOnGraph="bothNegative"
     
     if posOnGraph == "bothPositive":
-        if((recentMACDValue - recentSignalValue)):
+        if((recentMACDValue - recentSignalValue) > 0 ):
             return 1
         else: 
             return 0
@@ -142,7 +142,37 @@ for element in CriticalPoints:
     textfile.write(str(element) + "\n")
 textfile.close()
 
+currentEntry = 0.00
+currentExit = 0.00
+totalGain = 0.00
+currentGain = 0.00
 
+for i in range(0, len(CriticalPoints)):
+    if i == 0:
+        currentEntry = CriticalPoints[i]
+        print("Bought at: " + str(currentEntry))
+        continue
+    if i == 1:
+        currentExit = CriticalPoints[i]
+        print("Sold at: "+ str(CriticalPoints[i]))
+        currentGain = ((currentExit-currentEntry)/currentEntry)
+        print("Gain/Loss: " + str(currentGain) + " or " + str(currentExit - currentEntry) + " USDT\n")
+        totalGain = totalGain + currentGain
+        continue
+    if (i%2 == 0):
+        currentEntry = CriticalPoints[i]
+        print("bought at: "+ str(CriticalPoints[i]))
+        continue
+    if (i%2 == 1):
+        currentExit = CriticalPoints[i]
+        print("sold at: "+ str(CriticalPoints[i]))
+        currentGain = ((currentExit-currentEntry)/currentEntry)
+        totalGain = round(totalGain + currentGain, 3)
+        print("Gain/Loss: " + str(currentGain) + " or " + str(currentExit - currentEntry) + " USDT")
+        print("Total Gain/Loss: " + str(totalGain) + "\n")
+
+        continue
+    
 
 
 
